@@ -1,0 +1,23 @@
+{
+  "name": "backendshivana",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rise-fsociety/Shivani-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rise-fsociety/Shivani-Backend/issues"
+  },
+  "homepage": "https://github.com/Rise-fsociety/Shivani-Backend#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
