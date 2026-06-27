@@ -37,18 +37,46 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-   const {email, password} = req.body
+    const { email, password } = req.body;
 
-  const user = await User.findOne({
-    email: email.toLowerCase()
-  });
+    const user = await User.findOne({
+      email: email.toLowerCase(),
+    });
 
-  if(!user) return res.status(404).json({message: "User not found"})
+    if (!user) return res.status(404).json({ message: "User not found" });
 
+    const isMatch = await user.comparePassword(password);
+
+    if (!isMatch)
+      return res
+        .status(400)
+        .json({ message: "Doesnt match password. Repeat again plz" });
+
+    res.status(200).json({
+      message: "user login",
+      user: {
+        email: user.email.toLowerCase(),
+        username: user.username,
+      },
+    });
   } catch (error) {
-    
+    res.status(500).json({ message: "Internal server error" });
   }
-}
+};
 
+const logOut = async (req, res) => {
+  try {
+    const { email } = req.body;
 
-export { registerUser };
+    const user = await User.findOne({
+      email: email,
+    });
+
+    if (!email) return res.status(404).json({ message: "Not found" });
+  } catch (error) {
+
+    res.status(500).json({message:'INternal server error', error})
+  }
+};
+
+export { registerUser, loginUser, logOut };
