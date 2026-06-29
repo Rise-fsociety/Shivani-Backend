@@ -69,12 +69,14 @@ const logOut = async (req, res) => {
     const { email } = req.body;
 
     const user = await User.findOne({
-      email: email,
+      email,
     });
 
-    if (!email) return res.status(404).json({ message: "Not found" });
-  } catch (error) {
+    if (!user) return res.status(404).json({ message: "Not found" });
 
+    res.status(200).json({message:"Log out successful"})
+
+  } catch (error) {
     res.status(500).json({message:'INternal server error', error})
   }
 };
